@@ -1,6 +1,6 @@
 import * as z from "zod"
 
-const characterSchema = z.object({
+export const characterSchema = z.object({
     id: z.number(),
     name: z.string(),
     status: z.string(),
@@ -9,7 +9,7 @@ const characterSchema = z.object({
 
 export type Character = z.infer<typeof characterSchema>;
 
-const apiResponseSchema = z.object({
+export const apiResponseSchema = z.object({
     results: z.array(characterSchema),
 })
 
