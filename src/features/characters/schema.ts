@@ -1,7 +1,7 @@
 import * as z from "zod"
 
 export const characterSchema = z.object({
-    id: z.number(),
+    id: z.coerce.number(),
     name: z.string(),
     status: z.string(),
     image: z.string(),

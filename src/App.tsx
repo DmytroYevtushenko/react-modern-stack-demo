@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useCharacters } from "./useCharacters";
+import { useCharacters } from "./features/characters/useCharacters";
 import { useDebounce } from "./useDebounce";
 
 function App() {
