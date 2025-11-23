@@ -1,9 +1,13 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import axios from 'axios'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import App from './App.tsx'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import axios from 'axios'
+import AuthLayout from './layouts/AuthLayout.tsx'
+import MainLayout from './layouts/MainLayout.tsx'
+import HomePage from './pages/HomePage.tsx'
+import LoginPage from './pages/LoginPage.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,10 +20,33 @@ const queryClient = new QueryClient({
   },
 });
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      },
+    ],
+  },
+  {
+    path: '/login',
+    element: <AuthLayout />,
+    children: [
+      {
+        index: true,
+        element: <LoginPage />,
+      },
+    ],
+  },
+])
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <App />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </StrictMode>,
 )
