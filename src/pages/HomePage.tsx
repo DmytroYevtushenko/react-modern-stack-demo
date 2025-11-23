@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCharacters } from "@/features/characters/useCharacters";
-import { useDebounce } from "@/useDebounce";
+import { useDebounce } from "@/hooks/useDebounce";
 
 const HomePage = () => {
     const [page, setPage] = useState(1);
