@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useCharacters } from "@/features/characters/useCharacters";
 import { useDebounce } from "@/hooks/useDebounce";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
     const [page, setPage] = useState(1);
@@ -42,9 +43,10 @@ const HomePage = () => {
                 <>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {data?.results.map((character) => (
-                            <div
+                            <Link
+                                to={`/character/${character.id}`}
                                 key={character.id}
-                                className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-cyan-500/50 group"
+                                className="bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-700 hover:border-cyan-500/50 group cursor-pointer"
                             >
                                 <div className="relative overflow-hidden">
                                     <img
@@ -72,7 +74,7 @@ const HomePage = () => {
                                         {character.status}
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
 
