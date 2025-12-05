@@ -9,6 +9,8 @@ import MainLayout from './layouts/MainLayout.tsx'
 import HomePage from './pages/HomePage.tsx'
 import LoginPage from './pages/LoginPage.tsx'
 import CharacterPage from './pages/CharacterPage.tsx'
+import { AuthProvider } from './context/AuthContext.tsx'
+import { ProtectedRoute } from './components/ProtectedRoute.tsx'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -23,18 +25,23 @@ const queryClient = new QueryClient({
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <MainLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        index: true,
-        element: <HomePage />,
-      },
-      {
-        path: '/character/:id',
-        element: <CharacterPage />,
+        path: '/',
+        element: <MainLayout />,
+        children: [
+          {
+            index: true,
+            element: <HomePage />,
+          },
+          {
+            path: '/character/:id',
+            element: <CharacterPage />,
+          }
+        ],
       }
-    ],
+    ]
   },
   {
     path: '/login',
@@ -51,7 +58,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </QueryClientProvider>
   </StrictMode>,
 )
