@@ -30,6 +30,10 @@ const router = createBrowserRouter([
         index: true,
         element: <HomePage />,
       },
+      {
+        path: '/character/:id',
+        element: <CharacterPage />,
+      }
     ],
   },
   {
@@ -41,10 +45,6 @@ const router = createBrowserRouter([
         element: <LoginPage />,
       },
     ],
-  },
-  {
-    path: '/character/:id',
-    element: <CharacterPage />,
   }
 ])
 
